@@ -1,0 +1,16 @@
+[package]
+name = "ph-region"
+version = "0.1.0"
+edition = "2021"
+authors = ["Uriah Galang <codeitlikemiley@gmail.com>"]
+description = "A library for managing and utilizing administrative regions of the Philippines."
+license = "MIT"
+repository = "https://github.com/codeitlikemiley/ph-region"
+documentation = "https://github.com/codeitlikemiley/ph-region/blob/main/README.md"
+homepage = "https://github.com/codeitlikemiley/ph-region"
+keywords = ["regions", "philippines", "administrative", "geography"]
+categories = ["api-bindings", "development-tools::localization"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
