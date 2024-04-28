@@ -1,5 +1,7 @@
 # PH Regions Rust Library
 
+[![Rust](https://github.com/codeitlikemiley/ph-region/actions/workflows/rust.yml/badge.svg)](https://github.com/codeitlikemiley/ph-region/actions/workflows/rust.yml)
+
 The `ph-region` Rust module provides a comprehensive way to manage and interact with a predefined set of regions, such as administrative regions in the Philippines. This module allows easy access to region details through various utility functions.
 
 ## Features
