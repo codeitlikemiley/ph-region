@@ -250,3 +250,81 @@ impl Display for Region {
         write!(f, "({}) {}", self.abbrev(), self.name())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_from_str() {
+        assert_eq!(Region::from_str("ncr"), Some(Region::NCR));
+        assert_eq!(Region::from_str("CAR"), Some(Region::CAR));
+        assert_eq!(Region::from_str("1"), Some(Region::I));
+        assert_eq!(Region::from_str("region_ii"), Some(Region::II));
+        assert_eq!(Region::from_str("3"), Some(Region::III));
+        assert_eq!(Region::from_str("region_iva"), Some(Region::IVA));
+        assert_eq!(Region::from_str("region ivb"), Some(Region::IVB));
+        assert_eq!(Region::from_str("  5  "), Some(Region::V));
+        assert_eq!(Region::from_str("region_vi"), Some(Region::VI));
+        assert_eq!(Region::from_str("Region VII"), Some(Region::VII));
+        assert_eq!(Region::from_str("8"), Some(Region::VIII));
+        assert_eq!(Region::from_str("IX"), Some(Region::IX));
+        assert_eq!(Region::from_str("10"), Some(Region::X));
+        assert_eq!(Region::from_str("11"), Some(Region::XI));
+        assert_eq!(Region::from_str("12"), Some(Region::XII));
+        assert_eq!(Region::from_str("13"), Some(Region::XIII));
+        assert_eq!(Region::from_str("barmm"), Some(Region::BARMM));
+        assert_eq!(Region::from_str("invalid"), None);
+    }
+
+    #[test]
+    fn test_iter() {
+        let mut regions = Region::iter();
+        assert_eq!(regions.next(), Some(Region::NCR));
+        assert_eq!(regions.count(), 16); // Test after one item was taken
+    }
+
+    #[test]
+    fn test_display() {
+        let ncr = Region::NCR;
+        assert_eq!(format!("{}", ncr), "(NCR) National Capital Region");
+    }
+
+    #[test]
+    fn test_keys() {
+        let keys = Region::keys();
+        assert_eq!(keys.len(), 17);
+        assert!(keys.contains(&"ncr"));
+        assert!(keys.contains(&"car"));
+    }
+
+    #[test]
+    fn test_codes() {
+        let codes = Region::codes();
+        assert_eq!(codes.len(), 17);
+        assert!(codes.contains(&"Region I"));
+        assert!(codes.contains(&"Region II"));
+    }
+
+    #[test]
+    fn test_names() {
+        let names = Region::names();
+        assert_eq!(names.len(), 17);
+        assert!(names.contains(&"National Capital Region"));
+        assert!(names.contains(&"Cordillera Administrative Region"));
+    }
+
+    #[test]
+    fn test_list() {
+        let list = Region::list();
+        assert_eq!(list.get("ncr"), Some(&"National Capital Region"));
+        assert_eq!(list.get("car"), Some(&"Cordillera Administrative Region"));
+    }
+
+    #[test]
+    fn test_list_by_full_name() {
+        let list = Region::list_by_full_name();
+        assert_eq!(list.get("ncr"), Some(&"(NCR) National Capital Region"));
+        assert_eq!(list.get("car"), Some(&"(CAR) Cordillera Administrative Region"));
+    }
+}
